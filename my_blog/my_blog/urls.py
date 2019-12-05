@@ -18,5 +18,10 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # 文章管理
     path('article/', include('article.urls', namespace='article')),
+    # 用户管理
+    path('userprofile/', include('userprofile.urls', namespace='userprofile')),
+    # 重置密码
+    path('password-reset/', include('password_reset.urls')),
 ]
