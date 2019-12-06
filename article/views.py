@@ -1,23 +1,17 @@
-# 引入redirect 重定向模块
-from django.shortcuts import render, redirect
-# 引入HttpResponse
+from django.db.models import Q
 from django.http import HttpResponse
-# 引入ArticlePostForm表单类
-from .forms import ArticlePostForm
-# 引入User模型
-from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
-# 引入分页模块
+from django.views.generic import ListView
 from django.core.paginator import Paginator
+from django.contrib.auth.models import User
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 
 from .models import ArticlePost
 from comment.models import Comment
+from .forms import ArticlePostForm
+
 import markdown
 
-# 引入 Q 对象
-from django.db.models import Q
-
-# Create your views here.
 # 文章列表
 def article_list(request):
     search = request.GET.get('search')
@@ -155,3 +149,39 @@ def article_update(request, id):
         context = { 'article': article, 'article_post_form': article_post_form }
         # 将响应返回到模板中
         return render(request, 'article/update.html', context)
+
+
+
+class ContextMixin:
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['order'] = 'total_views'
+        return context
+
+class ArticleListView(ContextMixin, ListView):
+    context_object_name = 'articles'
+    template_name = 'article/list.html'
+    
+    def get_queryset(self):
+        search = self.request.GET.get('search')
+        order = self.request.GET.get('order')
+        if search:
+            if order == 'total_views':
+                # 用 Q 对象进行联合搜索
+                queryset = ArticlePost.objects.filter(
+                    Q(title__icontains=search) | 
+                    Q(body__icontains=search)
+                ).order_by('-total_views')
+            else:
+                queryset = ArticlePost.objects.filter(
+                    Q(title__icontains=search) | 
+                    Q(body__icontains=search)
+                )
+        else:
+            # 将 search 参数重置为空
+            search = ''
+            if order == 'total_views':
+                queryset = ArticlePost.objects.all().order_by('-total_views')
+            else:
+                queryset = ArticlePost.objects.all()
+        return queryset
