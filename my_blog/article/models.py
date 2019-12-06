@@ -3,6 +3,8 @@ from django.db import models
 from django.contrib.auth.models import User
 
 from django.utils import timezone
+
+from django.urls import reverse
 # Create your models here.
 
 # 博客文章数据类型模型
@@ -32,3 +34,7 @@ class ArticlePost(models.Model):
     # 函数 __str__ 定义当调用对象的 str() 方法时的返回值内容
     def __str__(self):
         return self.title
+
+    # 获取文章地址
+    def get_absolute_url(self):
+        return reverse('article:article_detail', args=[self.id])
