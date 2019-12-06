@@ -10,6 +10,7 @@ django = "==2.2"
 markdown = "*"
 pygments = "*"
 django-password-reset = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.8"

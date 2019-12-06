@@ -22,6 +22,9 @@ class ArticlePost(models.Model):
     # 文章更新时间
     updated = models.DateTimeField(auto_now=True)
 
+    # 文章浏览量
+    total_views = models.PositiveIntegerField(default=0)
+
     # 内部类 class Meta 用于给 model 定义元数据
     class Meta:
         ordering = ('-created',)
