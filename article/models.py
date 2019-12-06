@@ -5,7 +5,19 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 
 from django.urls import reverse
+
+from taggit.managers import TaggableManager
 # Create your models here.
+
+class ArticleColumn(models.Model):
+    # 栏目标题
+    title = models.CharField(max_length=100, blank=True)
+    # 创建时间
+    created = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.title
+
 
 # 博客文章数据类型模型
 class ArticlePost(models.Model):
@@ -27,6 +39,18 @@ class ArticlePost(models.Model):
     # 文章浏览量
     total_views = models.PositiveIntegerField(default=0)
 
+    # 文章栏目的 “一对多”外键
+    column = models.ForeignKey(
+        ArticleColumn,
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE,
+        related_name='article'
+    )
+
+    # 文章标签
+    tags = TaggableManager(blank=True)
+
     # 内部类 class Meta 用于给 model 定义元数据
     class Meta:
         ordering = ('-created',)
@@ -38,3 +62,6 @@ class ArticlePost(models.Model):
     # 获取文章地址
     def get_absolute_url(self):
         return reverse('article:article_detail', args=[self.id])
+
+
+    

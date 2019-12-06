@@ -11,6 +11,7 @@ markdown = "*"
 pygments = "*"
 django-password-reset = "*"
 pillow = "*"
+django-taggit = "*"
 
 [requires]
 python_version = "3.8"
