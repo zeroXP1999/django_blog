@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "901109d91b79547a0d21e128a5b84a0fc28f751ee63a3366ebba9b9992582f99"
+            "sha256": "56389f57d912217f057c18d5452d9b84b4a6405a715ecb799c21c764236761d4"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -23,6 +23,29 @@
             ],
             "index": "pypi",
             "version": "==2.2"
+        },
+        "django-ckeditor": {
+            "hashes": [
+                "sha256:46fc9c7346ea36183dc0cea350f98704f8b04c4722b7fe4fb18baf8ae20423fb",
+                "sha256:a59bab13f4481318f8a048b1b0aef5c7da768a6352dcfb9ba0e77d91fbb9462a"
+            ],
+            "index": "pypi",
+            "version": "==5.8.0"
+        },
+        "django-js-asset": {
+            "hashes": [
+                "sha256:8ec12017f26eec524cab436c64ae73033368a372970af4cf42d9354fcb166bdd",
+                "sha256:c163ae80d2e0b22d8fb598047cd0dcef31f81830e127cfecae278ad574167260"
+            ],
+            "version": "==1.2.2"
+        },
+        "django-mptt": {
+            "hashes": [
+                "sha256:6bf9eb26e54e92006ca82108a1c946c7df533ec27bddf3f795a83a32a3d1b04b",
+                "sha256:c765c1501dd0b5c22f0ca8b948550bd294cd2db68aefa0560c6ed7fcfdf4b95e"
+            ],
+            "index": "pypi",
+            "version": "==0.10.0"
         },
         "django-password-reset": {
             "hashes": [

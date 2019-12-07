@@ -19,6 +19,8 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+import notifications.urls
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     # 文章管理
@@ -29,6 +31,9 @@ urlpatterns = [
     path('password-reset/', include('password_reset.urls')),
     # 评论
     path('comment/', include('comment.urls', namespace='comment')),
+    # 通知
+    path('inbox/notifications/', include(notifications.urls, namespace='notifications')),
+    path('notice', include('notice.urls', namespace='notice')),
     
 ]
 

@@ -12,6 +12,12 @@ pygments = "*"
 django-password-reset = "*"
 pillow = "*"
 django-taggit = "*"
+django-ckeditor = "*"
+django-mptt = "*"
+django-notifications-hp = "*"
+django-notifications-hq = "*"
+django-notifications = "*"
+djando-notifications-hq = "*"
 
 [requires]
 python_version = "3.8"

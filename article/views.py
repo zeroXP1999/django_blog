@@ -6,11 +6,14 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
+import markdown
+
 from .models import ArticlePost, ArticleColumn
 from comment.models import Comment
 from .forms import ArticlePostForm
+from comment.forms import CommentForm
 
-import markdown
+
 
 # 文章列表
 def article_list(request):
@@ -67,7 +70,7 @@ def article_create(request):
     # 判断用户是否提交数据
     if request.method == 'POST':
         # 将提交的数据赋值给表单实例中
-        article_post_form = ArticlePostForm(data=request.POST)
+        article_post_form = ArticlePostForm(request.POST, request.FILES)
         # 判断提交的数据是否满足模型的要求
         if article_post_form.is_valid():
             # 保存数据，但暂时不提交到数据库中
@@ -101,6 +104,8 @@ def article_create(request):
 def article_detail(request, id):
     # 取出相应的文章
     article = ArticlePost.objects.get(id = id)
+    # 引入评论表单
+    comment_form = CommentForm()
 
     # 取出文章评论
     comments = Comment.objects.filter(article=id)
@@ -119,7 +124,7 @@ def article_detail(request, id):
         'markdown.extensions.toc'
     ])
     article.body = md.convert(article.body)
-    context = { 'article': article, 'toc': md.toc, 'comments': comments}
+    context = { 'article': article, 'toc': md.toc, 'comments': comments, 'comment_form': comment_form, }
     # 载入模板，并返回context对象
     return render(request, 'article/detail.html', context)
 
