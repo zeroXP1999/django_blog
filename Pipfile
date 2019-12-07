@@ -14,10 +14,8 @@ pillow = "*"
 django-taggit = "*"
 django-ckeditor = "*"
 django-mptt = "*"
-django-notifications-hp = "*"
+django-allauth = "*"
 django-notifications-hq = "*"
-django-notifications = "*"
-djando-notifications-hq = "*"
 
 [requires]
 python_version = "3.8"
