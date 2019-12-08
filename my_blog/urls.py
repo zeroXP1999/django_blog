@@ -20,8 +20,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 import notifications.urls
+from article.views import article_list
 
 urlpatterns = [
+    # home
+    path('', article_list, name='home'),
+    # 后台管理
     path('admin/', admin.site.urls),
     # 文章管理
     path('article/', include('article.urls', namespace='article')),
@@ -34,6 +38,8 @@ urlpatterns = [
     # 通知
     path('inbox/notifications/', include(notifications.urls, namespace='notifications')),
     path('notice', include('notice.urls', namespace='notice')),
+    # 第三方登录
+    path('accounts/', include('allauth.urls')),
     
 ]
 

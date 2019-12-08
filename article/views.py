@@ -1,6 +1,6 @@
 from django.db.models import Q
 from django.http import HttpResponse
-from django.views.generic import ListView
+from django.views.generic import ListView, View
 from django.core.paginator import Paginator
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
@@ -237,3 +237,11 @@ class ArticleListView(ContextMixin, ListView):
             else:
                 queryset = ArticlePost.objects.all()
         return queryset
+
+# 点赞数
+class IncreaseLikeView(View):
+    def post(self, request, *args, **kwargs):
+        article = ArticlePost.objects.get(id=kwargs.get('id'))
+        article.likes += 1
+        article.save()
+        return HttpResponse('success')

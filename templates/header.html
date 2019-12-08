@@ -26,7 +26,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <!-- 新增代码，小红点 -->
+                        <!-- 小红点 -->
                         {% if unread_count %}
                         <svg viewBox="0 0 8 8" width="8px" height="8px">
                             <circle cx="4" cy="4" r="4" fill="#ff6b6b"></circle>
@@ -35,7 +35,7 @@
                         {{ user.username }}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <!-- 新增代码，通知计数 -->
+                        <!-- 通知计数 -->
                         <a class="dropdown-item" href="{% url 'notice:list' %}">通知
                             {% if unread_count %}
                             <span class="badge badge-danger">{{ unread_count }}</span>

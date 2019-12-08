@@ -56,6 +56,9 @@ class ArticlePost(models.Model):
     # 文章标题图
     avatar = models.ImageField(upload_to='article/%Y%m%d/', blank=True)
 
+    # 点赞数统计
+    likes = models.PositiveIntegerField(default=0)
+
     # 内部类 class Meta 用于给 model 定义元数据
     class Meta:
         ordering = ('-created',)
